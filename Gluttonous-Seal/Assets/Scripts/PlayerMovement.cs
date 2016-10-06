@@ -6,16 +6,21 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float speed;
 
+	Vector3 newPosition;
 	void Start() {
+		//current character's position = (1,0)
+		//mouse at (61,0)
+		//in one minute we want character to move slowly
+		//takes 60 sec for character to get where we clicked
+		newPosition = transform.position;
 	}
 
 	void Update () 
 	{
 		if (Input.GetMouseButtonDown (0)) {
-			var mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			float step = speed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards (transform.position, mousePosition, step);
+			newPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		}
-
+		transform.position = Vector2.MoveTowards (transform.position, newPosition, speed * Time.deltaTime);
 	}
+
 }
