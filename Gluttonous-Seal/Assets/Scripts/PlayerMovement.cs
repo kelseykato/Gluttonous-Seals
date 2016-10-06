@@ -4,21 +4,15 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public Rigidbody2D rb;
+	public float speed;
 
 	void Start() {
-		
-		rb = GetComponent<Rigidbody2D>();
-
 	}
 
-	void FixedUpdate () 
+	void Update () 
 	{
 		var mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		rb.AddForce(Vector3.Normalize (mousePosition - transform.position));
-
-
-
-
+		float step = speed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards (transform.position, mousePosition, step);
 	}
 }
