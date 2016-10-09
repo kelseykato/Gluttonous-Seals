@@ -18,6 +18,6 @@ public class FoodManager : MonoBehaviour
 	{
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
-		Instantiate (food, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+		Instantiate (food, spawnPoints[spawnPointIndex].position, Quaternion.identity);
 	}
 }
