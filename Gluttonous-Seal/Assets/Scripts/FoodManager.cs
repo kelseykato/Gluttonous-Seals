@@ -24,15 +24,14 @@ public class FoodManager : MonoBehaviour
 
 		GameObject foodPoop = Instantiate (food, spawnPoints[spawnPointIndex].position, Quaternion.identity)as GameObject;
 		FoodList.Add (foodPoop);
-		Debug.Log ("WHY");
 
 	}
 
 	void Update() {
 
 		var player = GameObject.FindGameObjectWithTag ("MainCharacter");
-		for (int i = FoodList.Count; i >= 0; i--) {
-			float distance = Vector3.Distance (player.transform.position, food.transform.position);
+		for (int i = FoodList.Count - 1; i >= 0; i--) {
+			float distance = Vector3.Distance (player.transform.position, FoodList[i].transform.position);
 			if (distance < 0.3f) {
 				Destroy (FoodList[i]);
 				FoodList.RemoveAt (i);
