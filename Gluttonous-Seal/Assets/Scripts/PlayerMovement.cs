@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float speed;
 
+
 	Vector3 newPosition;
 	void Start() {
 		//current character's position = (1,0)
@@ -17,7 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update () 
 	{
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0)) 
+		{
 			newPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		}
 		transform.position = Vector2.MoveTowards (transform.position, newPosition, speed * Time.deltaTime);
