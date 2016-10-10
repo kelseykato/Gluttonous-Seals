@@ -3,33 +3,39 @@ using System.Collections.Generic;
 
 public class FoodManager : MonoBehaviour 
 {
-	public GameObject food;
+
 	public float spawnTime = 5f;
+	public GameObject food;
 	public Transform[] spawnPoints;
-	public List<GameObject>spawnPointsList;
+	public List<GameObject>FoodList;
 
 	// Use this for initialization
 	void Start () 
 	{
+		FoodList = new List<GameObject> ();
 		InvokeRepeating ("Spawn", spawnTime, spawnTime);
 	}
 	
 	// Update is called once per frame
 	void Spawn() 
 	{
+		spawnPoints.ToString();
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
-		Instantiate (food, spawnPoints[spawnPointIndex].position, Quaternion.identity);
-		spawnPointsList.Add (food);
+		GameObject foodPoop = Instantiate (food, spawnPoints[spawnPointIndex].position, Quaternion.identity)as GameObject;
+		FoodList.Add (foodPoop);
+		Debug.Log ("WHY");
+
 	}
-	void checkDistance() {
+
+	void Update() {
+
 		var player = GameObject.FindGameObjectWithTag ("MainCharacter");
-		foreach (GameObject food in spawnPointsList) {
+		for (int i = FoodList.Count; i >= 0; i--) {
 			float distance = Vector3.Distance (player.transform.position, food.transform.position);
 			if (distance < 0.3f) {
-				spawnPointsList.Remove (food);
-				Debug.Log ("WTF");
-				Destroy (food);
+				Destroy (FoodList[i]);
+				FoodList.RemoveAt (i);
 			}
 		}
 	}
